@@ -37,6 +37,7 @@ void tractarEvent(int tecla, FigTetris& fig, Fons& fons)
 	switch(tecla)
 	{
 		case TECLA_ESQUERRA:
+                if()
                 fig.moureFig(-1, 0, fons);
 			break;
 		case TECLA_DRETA:
@@ -147,7 +148,9 @@ int joc(int nivell)
                 // metaAconseguida a true si és així i les posicions corresponent de la última línia del tauler ams els colors de la figura
                 // Això s'ha de fer cridant al mètode moureFig de la classe FigTetris.
 
-                if(!figures[indexFig].moureFig(0,1,fons))
+
+
+               if(figures[indexFig].moureFig(0,1,fons))
                 {
                     metaAconseguida = true;
                 }

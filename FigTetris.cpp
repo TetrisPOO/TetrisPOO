@@ -130,15 +130,15 @@ bool FigTetris::moureFig(int dirX, int dirY, Fons& fons)
     //       i actualitzarem la última línia del tauler del fons amb els quadres del color de la figura actual.
     if(dirX == 0)
     {
-        if(dirY == 1)
+        if((dirY == 1))
             {
-                m_posY++;
+                m_posY += MIDA_Q;
 
             }
         else
             if(dirY == 2)
             {
-                m_posY = m_posY + 2;
+                m_posY = m_posY + 2 * MIDA_Q;
             }
         if(m_posY == FI_Y)
         {
@@ -150,10 +150,10 @@ bool FigTetris::moureFig(int dirX, int dirY, Fons& fons)
         if(dirY == 0)
         {
             if(dirX == -1)
-                dirX--;
+                m_posX -= MIDA_Q;
             else
                 if(dirX == 1)
-                    dirX++;
+                    m_posX += MIDA_Q ;
             espot = false;
         }
         return espot;
