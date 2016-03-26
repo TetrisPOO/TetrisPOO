@@ -1,11 +1,9 @@
-#include <iostream>
+
 #include "Joc.h"
 #include "../lib/libreria.h"
 #include <cstdlib>
 
 #include "Resultats.h"
-
-using namespace std;
 
 int llegirEvent()
 {

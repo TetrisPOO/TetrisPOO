@@ -32,6 +32,7 @@ void Resultats::pintaResultats(int nivell, int punts)
     // TODO
     // Pinta el grafic de fons dels resultats i mostra el nivell i els punts (que es passen com a paràmetres)
     // utilitzant el mètode escriuNumero
+    m_resultats.Draw(POS_RESX,POS_RESY);
     escriuNumero(nivell, POS_NIV_RESX, POS_NIV_RESY, PAS_DIGIT_X);
     escriuNumero(punts, POS_PUNTS_RESX, POS_PUNTS_RESY, PAS_DIGIT_X);
 }
