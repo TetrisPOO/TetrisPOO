@@ -114,7 +114,7 @@ int joc(int nivell)
         // ocupa la posició indexFig dins de l'array de figures
         // La posició x vindria donada per ( (INICI_X) + ( ( rand() % ( ( (FI_X - INICI_X - (amplada en quadres figura actual * MIDA_Q)) / MIDA_Q ) + 1 ) ) * MIDA_Q ));
         // La posició y per (INICI_Y);
-        figures[indexFig].setPosX(( (INICI_X) + ( ( rand() % ( ( (FI_X - INICI_X - figures[indexFig].amplada()) * MIDA_Q)) / MIDA_Q ) + 1 ) ) * MIDA_Q );
+        figures[indexFig].setPosX(( (INICI_X) + ( ( rand() % ( ( (FI_X - INICI_X - (figures[indexFig].amplada() * MIDA_Q)) / MIDA_Q ) + 1 ) ) * MIDA_Q )));
         figures[indexFig].setPosY(INICI_Y);
         // Inicialitzar variables que controlen si s'ha omplert la última línia i la velocitat del joc
         metaAconseguida = false;
