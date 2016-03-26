@@ -1,10 +1,11 @@
-
+#include <iostream>
 #include "Joc.h"
 #include "../lib/libreria.h"
 #include <cstdlib>
 
 #include "Resultats.h"
 
+using namespace std;
 
 int llegirEvent()
 {
@@ -38,15 +39,14 @@ void tractarEvent(int tecla, FigTetris& fig, Fons& fons)
 	switch(tecla)
 	{
 		case TECLA_ESQUERRA:
-                fig.moureFig(-MIDA_Q, 0, fons);
+                fig.moureFig(-1, 0, fons);
 			break;
 		case TECLA_DRETA:
-				fig.moureFig(MIDA_Q, 0, fons);
+				fig.moureFig(1, 0, fons);
 			break;
 		case TECLA_ABAIX:
-                fig.moureFig(0, 2 * MIDA_Q, fons);
+                fig.moureFig(0, 2 , fons);
 			break;
-		default: break;
 	}
 }
 
@@ -58,6 +58,7 @@ void crearFigTetris(FigTetris* figTetrisActual)
     for(int i = 0; i < MAX_FIG; i++)
     {
         figTetrisActual[i].create(i);
+
     }
 }
 
@@ -93,8 +94,8 @@ int joc(int nivell)
     // Inicialitzar els gràfics del fons i resultat cridant als mètodes Inicialitzar de les classes fons i resultat
     // per al fons "data/GraficsTetris/fons.png");
     // per el resultat "data/GraficsTetris/Resultats.png"
-    resultats.inicialitzar("data/GraficsTetris/fons.png");
-    fons.inicialitzar("data/GraficsTetris/Resultats.png");
+    fons.inicialitzar("data/GraficsTetris/fons.png");
+    resultats.inicialitzar("data/GraficsTetris/Resultats.png");
    	// TODO
    	// Mostrem la finestra del joc com a la sesio 1
     joc.Video_ShowWindow();
@@ -102,13 +103,8 @@ int joc(int nivell)
     // TODO
     // Declaració d'un array per guardar totes les figures del tetris.
     // Inicialitza els gràfics de totes les figures de l'array amb la funció CrearFigTetris
-    FigTetris figures[MAX_COLORS];
-    for(int i = 0; i < MAX_COLORS; i++)
-    {
-        figures[i].create(i);
-    }
-
-
+    FigTetris figures[MAX_FIG];
+    crearFigTetris(figures);
 	do
     {
         // Definició i inicialització aleatoria de la figura del tetris
@@ -152,8 +148,11 @@ int joc(int nivell)
                 // Moure la figura una posicions cap avall i verificar si hem arribat a la última línia del tauler actualitzant
                 // metaAconseguida a true si és així i les posicions corresponent de la última línia del tauler ams els colors de la figura
                 // Això s'ha de fer cridant al mètode moureFig de la classe FigTetris.
-                int dirX, dirY;
-                figures[indexFig].moureFig(dirX, dirY, fons);
+
+                if(!figures[indexFig].moureFig(0,1,fons))
+                {
+                    metaAconseguida = true;
+                }
 
                 contVPeca = velocitatJoc / nivell; // reinicialització comptador de velocitat
             }
@@ -166,7 +165,7 @@ int joc(int nivell)
 
 			// TODO
 			// Actualitza la pantalla com a sesio 1.
-            // COMMMMMMM?????????
+            joc.VideoUpdate();
 
             // Mira el temps que ha trigat
             diffT = difftime(time(NULL),  now);
@@ -187,7 +186,7 @@ int joc(int nivell)
 
 
             // TODO Mira si ha fet una linia
-            if(fons.guanyar() /* TODO aqui hem de cridar al mètode guanyar de la classe Fons per saber si hem aconseguit fer una linia*/)
+            if(fons.guanyar()) /* TODO aqui hem de cridar al mètode guanyar de la classe Fons per saber si hem aconseguit fer una linia*/
             {
                 metaAconseguida = true;
 

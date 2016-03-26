@@ -28,8 +28,7 @@ void FigTetris::draw()
 {
     // TODO
     // Heu de dibuixar el gràfic de la figura del tetris a la posicio m_posX, m_posY
-
-
+    m_figura.Draw(m_posX, m_posY);
 }
 
 void FigTetris::create(int indexFig)
@@ -144,7 +143,6 @@ bool FigTetris::moureFig(int dirX, int dirY, Fons& fons)
         if(m_posY == FI_Y)
         {
             espot = true;
-            fons.pintaFons();
 
         }
     }
@@ -169,6 +167,6 @@ void FigTetris::figuraEncaixada(Fons& fons)
 	// Modifica els quadres corresponents a l'amplada de la figura actual a les posicions de la última línia del tauler el fons amb els colors de la figura actual
 	for(int i = 0; i < amplada(); i++)
     {
-        fons.pintaFons();
+        fons.setTauler(m_posX, m_posY, m_color);
     }
 }

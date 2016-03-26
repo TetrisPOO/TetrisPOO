@@ -22,7 +22,7 @@ void Fons::inicialitzar(const char *rutaFons)
 {
     // TODO
     // Heu de crear l'Sprite amb el dibuix del fons del tauler
-    m_fons.Create("data/GraficsTetris/fons.png");
+    m_fons.Create(rutaFons);
     // També heu d'inicialitzar totes les posicions de la matriu m_tauler  a color negre, excepte la primera i ultima columna
     // i la última fila que s'han d'inicialitzar a gris. D'aquesta manera marquem que tot el tauler està buit. Per fer-ho podeu utilitzar
     // els mètodes posarNegre() i posarGris()
@@ -35,7 +35,7 @@ void Fons::posarNegre()
     // Heu d'inicialitzar totes les posicions interiors (que no són límits) de la matriu m_tauler a negre
     for(int i = 0; i <  MAX_FILA; i++)
     {
-        for(int j = 0; j < MAX_COL; j++)
+        for(int j = 1; j < MAX_COL; j++)
             m_tauler[i][j] = COLOR_NEGRE;
     }
 
@@ -52,9 +52,9 @@ void Fons::posarGris()
         m_tauler[i][MAX_COL-1] = COLOR_GRIS;
     }
 
-    for(int i = 0; i < MAX_COL; i++)
+    for(int i = 0; i <= MAX_COL; i++)
     {
-        m_tauler[MAX_FILA-1][i] = COLOR_GRIS;
+        m_tauler[MAX_FILA - 1][i] = COLOR_GRIS;
     }
 }
 
@@ -63,13 +63,37 @@ void Fons::pintaFons()
     // TODO:
     // Heu de pintar tots els quadres del fons del tauler que no són negres i que per tant corresponen a figures que ja s'han col·locat al tauler.
     // De moment, tots els quadres de color (no negres) estaran a l'úlitima línia del tauler
-    // Recoreu que els quadres grisos del tauler ja estan pintats a la imatge del fons i no els heu de tornar a dibuixar.
+    // Recordeu que els quadres grisos del tauler ja estan pintats a la imatge del fons i no els heu de tornar a dibuixar.
     m_fons.Draw(0,0);
-    //for(int i = 0; i < FI_X; i++)
-    //{
-     //   if(m_tauler[i][FI_Y-1]!=COLOR_NEGRE)
-     //       m_tauler[i][FI_Y - 1] = COLOR_ROIG;
-   // }
+    for(int j = 1; j < MAX_COL; j++)
+    {
+        switch(m_tauler[MAX_FILA - 1][j])
+        {
+            case COLOR_GROC:
+                m_quadrats[COLOR_GROC].Draw((MAX_FILA - 1) * MIDA_Q, j * MIDA_Q);
+                break;
+            case COLOR_TARONJA:
+                m_quadrats[COLOR_TARONJA].Draw((MAX_FILA - 1) * MIDA_Q, j * MIDA_Q);
+                break;
+            case COLOR_ROIG:
+                m_quadrats[COLOR_ROIG].Draw((MAX_FILA - 1) * MIDA_Q, j * MIDA_Q);
+                break;
+            case COLOR_MAGENTA:
+                m_quadrats[COLOR_MAGENTA].Draw((MAX_FILA - 1) * MIDA_Q, j * MIDA_Q);
+                break;
+            case COLOR_VERD:
+                m_quadrats[COLOR_VERD].Draw((MAX_FILA - 1) * MIDA_Q, j * MIDA_Q);
+                break;
+            case COLOR_BLAUCEL:
+                m_quadrats[COLOR_BLAUCEL].Draw((MAX_FILA - 1) * MIDA_Q, j * MIDA_Q);
+                break;
+            case COLOR_BLAUFOSC:
+                m_quadrats[COLOR_BLAUFOSC].Draw((MAX_FILA - 1) * MIDA_Q, j * MIDA_Q);
+                break;
+
+        }
+    }
+
 
 }
 
@@ -88,14 +112,14 @@ bool Fons::guanyar()
 	// Heu de retornar cert si la última línia del tauler que no està gris està tota pintada de colors
 	// i fals si hi ha algun quadre a negre.
 	bool totPintat = true;
-	int  i = 0;
+	int  j = 0;
 
-	while(totPintat && (i < FI_X))
+	while(totPintat && (j < MAX_COL))
     {
-        if(m_tauler[i][FI_Y] != COLOR_NEGRE)
+        if(m_tauler[MAX_FILA - 1][j] == COLOR_NEGRE)
             totPintat = false;
 
-        i++;
+        j++;
     }
     return totPintat;
 }
